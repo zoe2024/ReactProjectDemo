@@ -1,5 +1,11 @@
+/*
+ * @Date: 2021-09-22 22:52:50
+ * @Descripton: 
+ * @LastEditTime: 2021-09-22 23:50:20
+ */
 
 export const set = 'set$'
+export const demo = 'demo$'
 export const brandName = 'React' // slogan
 
 // 开发环境默认配置

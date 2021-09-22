@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-09-07 14:02:58
  * @Descripton: 
- * @LastEditTime: 2021-09-09 16:43:56
+ * @LastEditTime: 2021-09-22 23:39:35
  */
 
 module.exports = {
@@ -63,25 +63,25 @@ module.exports = {
       {
         id: 100898,
         resName: 'demo',
-        resKey: 'demo',
+        resKey: 'demo$',
         resIcon: 'pgmx',
         children: [
           {
             id: 10808,
             resName: 'demo1',
-            resKey: 'set$/userManage',
+            resKey: 'demo$/userManage',
             resIcon: 'pgmx',
           },
           {
             id: 10809,
             resName: 'demo2',
-            resKey: 'set$/roleManage',
+            resKey: 'demo$/roleManage',
             resIcon: 'pgmx',
           },
           {
             id: 10810,
-            resName: 'demo3',
-            resKey: 'set$/moduleManage',
+            resName: 'demo33',
+            resKey: 'demo$/moduleManage',
             resIcon: 'pgmx',
           },
         ],

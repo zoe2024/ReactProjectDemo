@@ -1,3 +1,8 @@
+/*
+ * @Date: 2021-09-22 22:52:50
+ * @Descripton: 
+ * @LastEditTime: 2021-09-22 23:44:02
+ */
 
 const path = '/mock'
 
@@ -31,17 +36,17 @@ module.exports = {
   [`${path}/usercenter/user/updateStatus`]: userManage.fetchChangeUserStatus, // 设置用户是否冻结状态
   // #endregion
 
-  // #region 角色管理
-  [`${path}/usercenter/role/save`]: roleManage.fetchRoleAdd, // 保存角色
-  [`${path}/usercenter/role/delete`]: roleManage.fetchRoleDelete, // 删除角色
-  [`${path}/usercenter/role/update`]: roleManage.fetchRoleUpdate, // 角色编辑
-  [`${path}/usercenter/role/resTree`]: roleManage.fetchTreeList, // 角色列表
-  [`${path}/usercenter/role/resList`]: roleManage.fetchModuleListInRole, // 已选择的模块
-  [`${path}/usercenter/role/detail`]: roleManage.fetchRoleDetail, // 已选择的菜单以及按钮
+  // #region demo
+  [`${path}/usercenter/demo/save`]: roleManage.fetchRoleAdd, // 保存角色
+  [`${path}/usercenter/demo/delete`]: roleManage.fetchRoleDelete, // 删除角色
+  [`${path}/usercenter/demo/update`]: roleManage.fetchRoleUpdate, // 角色编辑
+  [`${path}/usercenter/demo/resTree`]: roleManage.fetchTreeList, // 角色列表
+  [`${path}/usercenter/demo/resList`]: roleManage.fetchModuleListInRole, // 已选择的模块
+  [`${path}/usercenter/demo/detail`]: roleManage.fetchRoleDetail, // 已选择的菜单以及按钮
   [`${path}/usercenter/resource/button/list`]: roleManage.fetchButtonList, // 模块的按钮列表
   [`${path}/usercenter/user/removeRole`]: roleManage.fetchRoleDeletePeople, // 删除用户
-  [`${path}/usercenter/role/updateButton`]: roleManage.fetchUpdateButton, // 更新按钮
-  [`${path}/usercenter/role/updateRes`]: roleManage.fetchUpdateRoleRes, // 更新已选择模块
+  [`${path}/usercenter/demo/updateButton`]: roleManage.fetchUpdateButton, // 更新按钮
+  [`${path}/usercenter/demo/updateRes`]: roleManage.fetchUpdateRoleRes, // 更新已选择模块
   // #endregion
 
   // #region 模块管理
