@@ -1,51 +1,51 @@
 /*
  * @Date: 2021-09-25 21:33:04
  * @Descripton: 
- * @LastEditTime: 2021-09-26 11:38:18
+ * @LastEditTime: 2021-09-26 23:44:05
  */
 import React, { Component } from "react";
 import './index.less'
 import { Button, InputNumber } from 'antd';
 
-const typeMap = {
-  break: 1,
-  work: 1,
-}
 /**
  * 时间输入框。单位 min分钟
  */
 class TimeInput extends Component {
+  handleTimeChange = (value) => {
+    value = +value
+    if(isNaN(value)) { return }
+    this.props.handleTimeChange(value)
+  }
   render() {
-    let type = this.props.type
-    const handleTimeChange = function(value) {
-      value = +value
-      if(isNaN(value)) { return }
-      typeMap[type] = value
-      console.log({typeMap});
-    }
     return (
       <div className="time-input">
-        <InputNumber size="large" min={1} max={60} defaultValue={1} onChange={handleTimeChange} />
+        <InputNumber size="large" min={1} max={60} defaultValue={2} onChange={this.handleTimeChange} />
       </div>
     )
   }
 }
 class Break extends Component {
+  handleTimeChange(val) {
+    this.props.handleTimeChange(val)
+  }
   render() { 
     return (
       <div className="break">
         break
-        <TimeInput type="break"/>
+        <TimeInput handleTimeChange={(val) => this.handleTimeChange(val)} type="break"/>
       </div>
     )
   }
 }
 class Work extends Component {
+  handleTimeChange(val) {
+    this.props.handleTimeChange(val)
+  }
   render() { 
     return (
       <div className="work">
         work
-        <TimeInput type="work"/>
+        <TimeInput handleTimeChange={(val) => this.handleTimeChange(val)} type="work"/>
       </div>
     )
   }
@@ -67,31 +67,29 @@ class CountDown extends Component {
           <Button onClick={() => this.props.stopTimer()}>stop</Button>
           <Button onClick={() => this.props.goTimer()}>go</Button>
           <Button onClick={() => this.props.resetTimer()}>reset</Button>
+          <Button onClick={() => this.props.toggleType()}>toggle</Button>
         </div>
       </div>
     )
   }
 }
 
-// 声明组件  并对外输出
 export default class App extends Component {
   constructor(props) {
     super(props)
-    let defaultType = 'work'
-    let restTime = typeMap[defaultType] * 60
-    this.state = {
-      restTime,
-      defaultType
-    }
     this.timer = null
   }
+  state = {
+    restTime: 2 * 60,
+    breakTime: 2,
+    workTime: 2,
+    currentType: 'work'
+  }
   componentDidMount() {
-    this.momeRestTime = this.state.restTime // 缓存倒计时时间，作为重置时的初始值
     this.goTimer()
   }
-  componentDidUpdate() {
-    let preRestTime = arguments[1].restTime
-    if(preRestTime <= 1) {
+  componentDidUpdate(pre, next) {
+    if(next.restTime === 1) {
       this.stopTimer()
       this.toggleType()
     }
@@ -112,29 +110,42 @@ export default class App extends Component {
       })
     }, 100);
   }
+  
   resetTimer = () => {
+    const restTimeMap = {
+      work: this.state.workTime,
+      break: this.state.breakTime
+    }
+    let restTime = restTimeMap[this.state.currentType] * 60;
     this.setState({
-      restTime: this.momeRestTime
+      restTime
     })
   }
   toggleType = () => {
-    let type = this.state.defaultType === 'work' ? 'break' : 'work'
+    const toggleType = this.state.currentType === 'work' ? 'break' : 'work';
+    const restTime = this.state.currentType === 'work' ? this.state.breakTime : this.state.workTime
     this.setState({
-      defaultType: type,
-      restTime: typeMap[type] * 60
+      currentType: toggleType,
+      restTime: restTime * 60
     }, this.goTimer)
+  }
+  handleTimeChange(val, setTimeType) {
+    this.setState({
+      [setTimeType]: val,
+    })
   }
   render() {
    return (
     <div className="container">
-      <Break />
-      <Work />
+      <Break handleTimeChange={(val) => this.handleTimeChange(val, 'breakTime')}/>
+      <Work handleTimeChange={(val) => this.handleTimeChange(val, 'workTime')}/>
       <CountDown 
-      defaultType={this.state.defaultType}
+      defaultType={this.state.currentType}
       restTime={this.state.restTime}
       stopTimer={this.stopTimer}
       goTimer={this.goTimer}
       resetTimer={this.resetTimer}
+      toggleType={this.toggleType}
       />
     </div>
    )
