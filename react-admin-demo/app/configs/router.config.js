@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-09-22 22:52:50
- * @Descripton: 
- * @LastEditTime: 2021-09-25 21:35:18
+ * @Descripton: 路由
+ * @LastEditTime: 2021-10-11 23:15:58
  */
 import React from 'react'
 import { Router, Route, IndexRoute, hashHistory/* , Redirect */ } from 'react-router'
@@ -34,6 +34,7 @@ export default () => (
       <Route path={`/${demo}/demo3`} component={sysDemo.demo3} />
       <Route path={`/${demo}/demo-echarts`} component={sysDemo.demoEcharts} />
       <Route path={`/${demo}/pomodoro`} component={sysDemo.pomodoro} />
+      <Route path={`/${demo}/demoMobx`} component={sysDemo.demoMobx} />
       {/** *demo 结束 */}
     </Route>
     <Route path="/login" component={base.login} />

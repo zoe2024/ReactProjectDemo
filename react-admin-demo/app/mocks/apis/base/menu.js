@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-09-07 14:02:58
- * @Descripton: 
- * @LastEditTime: 2021-09-25 21:38:59
+ * @Descripton: menu
+ * @LastEditTime: 2021-10-11 23:16:38
  */
 
 module.exports = {
@@ -94,6 +94,12 @@ module.exports = {
             id: 10810,
             resName: 'pomodoro',
             resKey: 'demo$/pomodoro',
+            resIcon: 'pgmx',
+          },
+          {
+            id: 10810,
+            resName: 'demoMobx',
+            resKey: 'demo$/demoMobx',
             resIcon: 'pgmx',
           },
         ],

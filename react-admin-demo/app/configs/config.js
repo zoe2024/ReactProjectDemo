@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-09-22 22:52:50
- * @Descripton: 
- * @LastEditTime: 2021-09-22 23:50:20
+ * @Descripton: 配置项
+ * @LastEditTime: 2021-10-11 23:15:48
  */
 
 export const set = 'set$'
