@@ -1,12 +1,16 @@
 /*
  * @Date: 2021-09-25 21:33:04
- * @Descripton:
- * @LastEditTime: 2021-10-06 14:09:41
+ * @Descripton: 类组件的实现
+ * 总结：
+ *  1. 类组件中通过setState改变状态，但setState是个异步操作，该方法的第二个参数接收一个回调函数，以此来同步界面数据
+ *  2. 如果父组件不能更改子组件视图，也就是父组件的某个状态改变了，但子组件没有改变，可以在子组件的componentWillReceiveProps生命周期中触发父组件来更新
+ * @LastEditTime: 2021-10-14 23:41:58
  */
 import React, { Component } from 'react';
 import './index.less'
 import { Button, InputNumber } from 'antd';
 
+const TIME = 3000
 /**
  * 时间输入框。单位 min分钟
  */
@@ -17,6 +21,7 @@ class TimeInput extends Component {
     this.props.handleTimeChange(value)
   }
   render() {
+    console.log('TimeInput-render');
     return (
       <div className="time-input">
         <InputNumber size="large" min={1} max={60} defaultValue={2} onChange={this.handleTimeChange} />
@@ -29,6 +34,7 @@ class Break extends Component {
     this.props.handleTimeChange(val)
   }
   render() {
+    console.log('Break-render');
     return (
       <div className="break">
         break
@@ -42,6 +48,7 @@ class Work extends Component {
     this.props.handleTimeChange(val)
   }
   render() {
+    console.log('Work-render');
     return (
       <div className="work">
         work
@@ -51,13 +58,16 @@ class Work extends Component {
   }
 }
 class CountDown extends Component {
+  componentWillReceiveProps() {
+    console.log('CountDown-componentWillReceiveProps', arguments);
+  }
   render() {
     const restTime = this.props.restTime // 单位 s
     const restMin = parseInt(restTime / 60)
     const restSecond = restTime % 60
     return (
       <div className="count-down">
-        <header>{ `${this.props.defaultType}-ing` }</header>
+        <header>{ `${this.props.currentType}-ing` }</header>
         <div className="tip" style={{ color: restMin <= 0 ? 'red' : '' }}>
           { restMin } <span>分钟</span>
           :
@@ -108,7 +118,7 @@ export default class App extends Component {
       this.setState({
         restTime: this.state.restTime - 1,
       })
-    }, 100);
+    }, TIME);
   }
 
   resetTimer = () => {
@@ -130,17 +140,21 @@ export default class App extends Component {
     }, this.goTimer)
   }
   handleTimeChange(val, setTimeType) {
+    console.log('timeChange');
     this.setState({
-      [setTimeType]: val,
+      [`${setTimeType}Time`]: val,
+      currentType: setTimeType,
+      restTime: +val * 60,
     })
   }
   render() {
+    console.log('App-render');
     return (
       <div className="container">
-        <Break handleTimeChange={val => this.handleTimeChange(val, 'breakTime')} />
-        <Work handleTimeChange={val => this.handleTimeChange(val, 'workTime')} />
+        <Break handleTimeChange={val => this.handleTimeChange(val, 'break')} />
+        <Work handleTimeChange={val => this.handleTimeChange(val, 'work')} />
         <CountDown
-          defaultType={this.state.currentType}
+          currentType={this.state.currentType}
           restTime={this.state.restTime}
           stopTimer={this.stopTimer}
           goTimer={this.goTimer}
