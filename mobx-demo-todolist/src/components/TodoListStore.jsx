@@ -23,7 +23,7 @@ class TodoList {
         return `下一个任务：${this.todos[0].title}`
     }
 
-    @action addTodo (title) {
+    @action.bound addTodo (title) {
         if (!title) return;
         this.todos.push(new Todo(title));
     }
