@@ -31,15 +31,13 @@ class TodoListView extends React.Component {
         <main>
           <ul>
             {this.store.todos.map(todo => (
-              <Fragment key={todo.id}>
-                <li>
+                <li key={todo.id}>
                   <input type="checkbox" checked={todo.isFinshed} onChange={() => todo.isFinshed = !todo.isFinshed} />
                   {
                     todo.isFinshed ? <del>{todo.title}</del> : <span>{todo.title}</span>
                   }
                   <span style={{ marginLeft: "16px", cursor: "pointer" }} onClick={() => this.store.removeTodo(todo)}>X</span>
                 </li>
-              </Fragment>
             ))}
           </ul>
         </main>

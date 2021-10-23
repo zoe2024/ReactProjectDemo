@@ -4,7 +4,7 @@
  * 总结：
  *  1. 类组件中通过setState改变状态，但setState是个异步操作，该方法的第二个参数接收一个回调函数，以此来同步界面数据
  *  2. 如果父组件不能更改子组件视图，也就是父组件的某个状态改变了，但子组件没有改变，可以在子组件的componentWillReceiveProps生命周期中触发父组件来更新
- * @LastEditTime: 2021-10-14 23:41:58
+ * @LastEditTime: 2021-10-22 22:00:29
  */
 import React, { Component } from 'react';
 import './index.less'
