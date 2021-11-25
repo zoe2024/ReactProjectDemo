@@ -7,6 +7,7 @@ import React, { Component } from 'react';
 import './App.css';
 import TodoList from "./views/TodoList";
 import HooksStudy0 from "./views/HooksStudy0";
+import HooksStudy1 from "./views/HooksStudy1";
 
 export default class App extends Component {
 
@@ -14,7 +15,8 @@ export default class App extends Component {
     return (
       <div className="container">
         {/* <TodoList /> */}
-        <HooksStudy0 />
+        {/* <HooksStudy0 /> */}
+        <HooksStudy1 />
       </div>
     )
   }

@@ -1,3 +1,8 @@
+/** 
+ * 技术博文学习
+ * 地址： 
+ */
+
 import React, {
   Component,
   useState,
@@ -182,7 +187,7 @@ const RefA = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => {
     return {
       test: () => {
-        console.log("123");
+        console.log("ref-ok：使用forwardRef转发ref");
       },
     };
   });
@@ -195,12 +200,18 @@ const RefA1 = (props) => {
   useImperativeHandle(testRef, () => {
     return {
       test: () => {
-        console.log("ok-1");
+        console.log("RefA1-ok： 不使用forwardRef转发");
+        setInfo((old) => ++old);
       },
     };
   });
   const [info, setInfo] = useState(0);
-  return <div>RefA1-info：{info}</div>;
+  return (
+    <div>
+      <div onClick={() => testRef.current.test()}>子组件中触发ref</div>
+      RefA1-info：{info}
+    </div>
+  );
 };
 
 function TestRef() {
@@ -215,11 +226,14 @@ function TestRef() {
       >
         <RefA ref={ref}></RefA>
       </div>
-      <div
-        onClick={() => {
-          ref1.current.test();
-        }}
-      >
+      <div style={{ width: "100%", border: "1px solid blue" }}>
+        <div
+          onClick={() => {
+            ref1.current.test();
+          }}
+        >
+          父组件中触发ref
+        </div>
         <RefA1 testRef={ref1}></RefA1>
       </div>
     </div>
