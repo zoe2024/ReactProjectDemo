@@ -13,7 +13,7 @@ class Todo {
 class TodoList {
     @observable todos = [];
 
-    @computed get completedTodosCount() {
+    get completedTodosCount() {
         return this.todos.filter(todo => todo.finished).length;
     }
 
@@ -30,6 +30,6 @@ class TodoList {
 }
 const store = new TodoList();
 store.todos.push(new Todo('修复谷歌浏览器页面显示问题'), new Todo('提交意见反馈代码'));
-store.todos[1].finished = true;
+// store.todos[1].finished = true;
 
 export default store;

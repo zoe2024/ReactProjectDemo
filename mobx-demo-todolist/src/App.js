@@ -1,21 +1,23 @@
 /*
  * @Date: 2021-10-17 22:14:14
  * @Descripton: 
- * @LastEditTime: 2021-10-17 22:31:45
+ * @LastEditTime: 2021-11-24 20:58:52
  */
 import React, { Component } from 'react';
 import './App.css';
-import TodoListStore from "./components/TodoListStore";
-import TodoListView from "./components/TodoListView";
-import { Provider } from 'mobx-react';
+import TodoList from "./views/TodoList";
+import HooksStudy0 from "./views/HooksStudy0";
+import HooksStudy1 from "./views/HooksStudy1";
 
 export default class App extends Component {
 
   render() {
     return (
-      <Provider TodoListStore={TodoListStore}>
-        <TodoListView/>
-      </Provider>
+      <div className="container">
+        {/* <TodoList /> */}
+        {/* <HooksStudy0 /> */}
+        <HooksStudy1 />
+      </div>
     )
   }
 }
